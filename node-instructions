@@ -1,0 +1,14 @@
+---------how to access web3 from node in terminal------
+npm install web3          	 #Initialize web3 library to node 
+node 				                  # enter into node using terminal
+var Web3=require('web3')	   # to assgn web3 library to a variable
+var url='http://' 		        # ethereum endpoint url from infura or any other site var address= '0x2CA09C37f96cAaF2B14cb8e2eA3edE7565640d78' # to assign user address to a variable
+
+
+ var web3=new Web3(url) 	    # to assign endpoint url to web3 variable to fetch balance
+ 
+web3.eth.getBalance(address, (err,bal) =>{balance = bal}) # to fetch balance 
+
+ balance                      # to display available balance in the account
+
+web3.eth.accounts.create()    # to create a new eth account
