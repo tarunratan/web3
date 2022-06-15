@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0
+// SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
 contract Auction
@@ -24,7 +24,6 @@ contract Auction
          {
              revert("auction ended");
          }
-         //to make a minimum highest bid greater than 1 percet of current bid
         temp= highestBid+highestBid*1/100;
          if(msg.value <= temp)
          {
@@ -66,4 +65,30 @@ contract Auction
          ended = true;
          beneficiary.transfer(highestBid);
      }
+mapping (address => uint) public myMap;
+function get (address _addr) public view returns (uint)
+{
+    return myMap[_addr];
+}
+function set (address _addr,uint _i) public 
+{
+    myMap[_addr]=_i;
+}
+function remove(address _addr) public 
+{
+    delete myMap[_addr];
+}
+
+//nested mapping usage
+struct Book{
+    string title;
+    string author;
+}
+mapping(address=> mapping(uint => Book)) public myBooks;
+
+function addmyBook (uint _id, string memory _title, string memory _author) public {
+    myBooks[msg.sender][_id]=Book(_title,_author);
+}
+
+
 }
