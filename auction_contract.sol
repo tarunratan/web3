@@ -1,3 +1,7 @@
+/**
+ *Submitted for verification at Etherscan.io on 2022-06-16
+*/
+
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
@@ -10,12 +14,17 @@ contract Auction
     uint temp;
      mapping(address => uint) public pendingReturns;
      bool ended = false;
+      string public  nftImage="";
+     uint public startTime;
 
      event HighestBidIncrease(address bidder,uint amount);
      event AuctionEnded(address winner, uint amount);
 
-     constructor (uint _biddingTime , address payable _beneficiary)
+     function initiate_bid  (uint _starttime,string memory _nft,uint _biddingTime , address payable _beneficiary) public
      {
+         nftImage=_nft;
+         startTime=_starttime;
+
          beneficiary = _beneficiary;
          auctionEndtime=block.timestamp+_biddingTime;
      }
@@ -65,30 +74,30 @@ contract Auction
          ended = true;
          beneficiary.transfer(highestBid);
      }
-mapping (address => uint) public myMap;
-function get (address _addr) public view returns (uint)
-{
-    return myMap[_addr];
-}
-function set (address _addr,uint _i) public 
-{
-    myMap[_addr]=_i;
-}
-function remove(address _addr) public 
-{
-    delete myMap[_addr];
-}
+// mapping (address => uint) public myMap;
+// function get (address _addr) public view returns (uint)
+// {
+//     return myMap[_addr];
+// }
+// function set (address _addr,uint _i) public 
+// {
+//     myMap[_addr]=_i;
+// }
+// function remove(address _addr) public 
+// {
+//     delete myMap[_addr];
+// }
 
-//nested mapping usage
-struct Book{
-    string title;
-    string author;
-}
-mapping(address=> mapping(uint => Book)) public myBooks;
+// //nested mapping usage
+// struct Book{
+//     string title;
+//     string author;
+// }
+// mapping(address=> mapping(uint => Book)) public myBooks;
 
-function addmyBook (uint _id, string memory _title, string memory _author) public {
-    myBooks[msg.sender][_id]=Book(_title,_author);
-}
+// function addmyBook (uint _id, string memory _title, string memory _author) public {
+//     myBooks[msg.sender][_id]=Book(_title,_author);
+// }
 
 
 }
